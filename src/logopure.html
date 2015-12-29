@@ -36,47 +36,87 @@
 		"M788.5,642.3c0-17.9-7.6-28.2-23.3-28.2c-16.1,0-24.5,11.8-24.5,29.4v69.4h-11.8V604.7h11.8v11.2c3.3-5.8,12.1-12.4,25.8-12.4c24.2,0,33.9,16.7,33.9,37.6v71.5h-11.8V642.3z"
 			];
 
-	
+	// Set up empty array and group
 	var nhletters = [];
 	var nhGroup = new Group();
 
+	var nhletterOGs = [];
+
+	// Add svg path data to array of letters
 	for (i = 0; i < letters.length; i++) {
-    	nhletters.push(new Path(letters[i])); 
-    	nhletters[i].strokeColor = 'red';
-    	nhGroup.addChild(nhletters[i]);
-	}	
+    	nhletterOGs.push(new Path(letters[i])); 
+    	nhletterOGs[i].strokeColor = 'red';
+    	nhGroup.addChild(nhletterOGs[i]);
+	}
+
+	var nhletters = nhGroup.clone();
+	nhGroup.visible = false;
+	nhletters.fillColor = 'black';
+	// console.log(nhletters);
+
+
+	// // Add original positions of vertices to og array
+	// for (i = 0; i < nhletterOGs.length; i++) {
+ //    	nhletterOGs.push(verts = new Array());
+ //    	for
+	// }	
 
 	nhGroup.scale(0.8);
 	nhGroup.position = view.center;
 
 	var nhletterCircs = [];
+	var nhletterCircOGs = [];
 
 	for (i = 0; i < letters.length; i++) {
-		var segs = nhletters[i].segments.length;
+		var segs = nhletterOGs[i].segments.length;
 		for (j = 0; j < segs; j++) {
-			var circPoint = nhletters[i].segments[j].point;
+			var circPoint = nhletterOGs[i].segments[j].point;
 			nhletterCircs.push(new Path.Circle(new Point(circPoint), 5));
+			nhletterCircOGs.push(new Point(circPoint));
 		}
 	}	
 
 	for (i = 0; i < nhletterCircs.length; i++) {
-		nhletterCircs[i].strokeColor = 'black';
+		// nhletterCircs[i].strokeColor = 'black';
 	}
             // console.log(myCircle);
 
 		function onMouseMove(event) {
             target = event.point;
 
-			for (i = 0; i < nhletterCircs.length; i++) {
-				var nhCircPos = nhletterCircs[i].position;
-				var nhCircDist = nhCircPos - target;
-				var nhCircLength = Math.abs(nhCircDist.length);
-				if(nhCircLength < 10) {
-					nhletterCircs[i].fillColor = 'black';
+			for (i = 0; i < nhletterOGs.length; i++) {
+				var segs = nhletterOGs[i].segments.length;
+				for (j = 0; j < segs; j++) {
+					var nhLetterPos = nhletters.children[i].segments[j].point;
+					// console.log(nhLetterPos);
+					var nhLetterDist = nhLetterPos - target;
+					var nhLetterLength = Math.abs(nhLetterDist.length);
+					// console.log(nhLetterPos);
+
+					var nhLetterNorm = nhLetterDist.normalize();
+
+					nhletters.children[i].segments[j].point = nhletterOGs[i].segments[j].point + nhLetterNorm * 30;
 				}
 			}
+
+			// for (i = 0; i < nhletterCircs.length; i++) {
+				// var nhCircPos = nhletterCircs[i].position;
+				// var nhCircDist = nhCircPos - target;
+				// var nhCircLength = Math.abs(nhCircDist.length);
+
+				// var nhCircNorm = nhCircDist.normalize();
+				// nhletterCircs[i].position = nhletterCircOGs[i] + nhCircNorm * 10;
+
+
+				// if(nhCircLength < 100) {
+				// 	var nhCircNorm = nhCircDist.normalize();
+				// 	nhletterCircs[i].position = nhletterOGs[i] + nhCircNorm * 10;
+				// } else {
+				// 	nhletterCircs[i].position = nhletterOGs[i];
+				// }
+			// }
             // myCircle[1].position = target;
-            // nhletters[0].segments[1].point = target;
+            // nhletterOGs[0].segments[1].point = target;
         }
 
     function onResize(event) {

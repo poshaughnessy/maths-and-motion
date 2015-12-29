@@ -1,6 +1,6 @@
-# Barebones gulp project
+# Building a new site some with paper js stuff
 
-Barebones gulp.js project. Gives you local server, liveReload, Sass, & jshint.
+Based on mark's experiment base
 
 ### getting started
 

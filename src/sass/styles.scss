@@ -1,0 +1,97 @@
+//===============================================================================
+// IMPORTS
+//===============================================================================
+// normalize.css v3.0.0 | MIT License | git.io/normalize
+@import "_normalize.scss";
+
+// define mixins & functions
+@import "_mixins.scss";
+
+// define mixins & functions
+@import "_globalvariables.scss";
+
+
+
+//===============================================================================
+// BASICS
+//===============================================================================
+// box-sizing everywhere and webkit text rendering correction
+*,
+*::before,
+*:after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+// remove padding & list styles from all <ul> as default
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+html,
+body {
+  background-color: $dark;
+  color: $ink;
+  font-family: sans-serif;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+//===============================================================================
+// HEADINGS
+//===============================================================================
+
+body {
+	font-family: platform;
+	-moz-font-feature-settings:"ss01" 1; 
+	-ms-font-feature-settings:"ss01" 1; 
+	-o-font-feature-settings:"ss01" 1; 
+	-webkit-font-feature-settings:"ss01" 1; 
+	font-feature-settings:"ss01" 1;
+}
+
+h1 {
+	color: white;
+	font-weight: 100;
+	font-size: 64px;
+}
+
+//===============================================================================
+// STYLES
+//===============================================================================
+
+.test-box {
+	width: 400px;
+	height: 300px;
+	background: url(../img/gradient.jpg);
+	background-size: cover;
+	padding: 2px;
+	transition: 0.2s;
+	&:before{
+	}
+	&:hover{
+		padding: 6px;
+	}
+}
+
+.inner-box {
+	width: 100%;
+	height: 100%;
+	background: $dark;
+	text-align: center;
+}
+
+.intro-text {
+	font-weight: 300;
+	color: white;
+	font-size: 32px;
+}
+
+#logocanvas {
+	background: #fff;
+	width: 100%;
+	height: 100%;
+}

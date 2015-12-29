@@ -51,8 +51,8 @@
 
 	var nhletters = nhGroup.clone();
 	nhGroup.visible = false;
-	nhletters.fillColor = 'black';
-	// console.log(nhletters);
+	nhletters.fillColor = 'red';
+	console.log(nhletters);
 
 
 	// // Add original positions of vertices to og array
@@ -95,7 +95,12 @@
 
 					var nhLetterNorm = nhLetterDist.normalize();
 
-					nhletters.children[i].segments[j].point = nhletterOGs[i].segments[j].point + nhLetterNorm * 30;
+					// nhletters.children[i].segments[j].point = nhletterOGs[i].segments[j].point + nhLetterNorm * 20;
+
+					nhletters.children[i].segments[j].point = nhletterOGs[i].segments[j].point;
+					nhletters.children[i].segments[j].handleIn = nhLetterNorm * -20;
+					nhletters.children[i].segments[j].handleOut = nhLetterNorm * 20;
+						
 				}
 			}
 

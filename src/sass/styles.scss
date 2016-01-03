@@ -31,7 +31,7 @@ ul {
 
 html,
 body {
-  background-color: $dark;
+  // background-color: $dark;
   color: $ink;
   font-family: sans-serif;
   line-height: 1.4;
@@ -94,4 +94,26 @@ h1 {
 	background: #fff;
 	width: 100%;
 	height: 100%;
+}
+
+.fullwidthbgcanvas {
+	width: 100%;
+	height: 100%;
+	background: #000;
+	position: fixed;
+	z-index: -1;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
+}
+
+.inner-wrapper {
+	padding: 50px;
+}
+
+.logotitle {
+	margin: 0;
+	padding: 0;
+	line-height: 0.6;
 }

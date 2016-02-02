@@ -8,96 +8,11 @@
 
   <link rel="stylesheet" href="css/styles.css">
   <script type="text/javascript" src="js/vendor/paper-full.js"></script>
-   <script type="text/paperscript" canvas="bgcanvas">
-
-		var connectSeg = [];
-
-        function initialRender() {
-			var margin = 50;
-			var startxPos = margin;
-			var endxPos = view.size.width - margin;
-			var fullx = endxPos - startxPos;
-			var xInc = fullx / 20;
-
-			var startyPos = margin;
-			var endyPos = view.size.height - margin;
-			var fully = endyPos - startyPos;
-			var yInc = fully / 20;
-
-
-			for (var i = startxPos; i <= endxPos; i+=xInc) {
-				for (var j = startyPos; j < endyPos; j+=yInc) {
-	            	var position = new Point(i, j);
-	            	var path = new Path(position, position + 10);
-	            	var icolor = i / view.size.width;
-	            	var jcolor = j / view.size.width;
-
-	            	var pathColor = new Color(jcolor, 0.2, icolor);
-					path.style = {
-						strokeColor: pathColor,
-						strokeWidth: 5,
-						strokeCap: 'round'
-					};
-					connectSeg.push(path);
-
-		        }
-		    }
-		}
-
-		initialRender();
-
-        function moveLine(thisPos, targetPos) {
-        	
-				var P1 = thisPos;
-				var P2 = targetPos;
-				var d1 = P2 - P1;
-				var direction = d1.normalize();
-
-				var P3 = P1 + (direction * (d1 * 0.05));
-
-            	return P3;
-        }
-
-		function onResize(event) {
-			// connectSeg = [];
-			// initialRender();
-		}
-
-
-		function onFrame(event) {
-			// Each frame, rotate the definition
-			// of the symbol by 1 degree:
-			// symbol.definition.rotate(1);
-			
-			// Add 0.2 degrees to the stroke color's hue:
-			// symbol.definition.strokeColor.hue += 0.2;
-		}
-
-		function onMouseMove(event) {
-			// myCircle.position = event.point;
-			for(i = 0; i < connectSeg.length; i++){
-				var position = moveLine(connectSeg[i].segments[0].point, event.point);
-				connectSeg[i].segments[1].point = position;
-			}
-		}
-   </script>
+   <script type="text/paperscript" canvas="bgcanvas" src="js/1.js"></script>
 </head>
 <body>
 
 	<canvas id="bgcanvas" class="fullwidthbgcanvas" resize></canvas>
-	<div class="inner-wrapper">
-		<h1 class="logotitle">Niall Henn</h1>
-
-		<p class="intro-text">
-		Hello, I’m Niall.<br />
-		I'm an Artist, Designer, and Rapper.<br />
-		I head up the motion department at Pebble and occasionally do freelance work.</p>
-
-	</div>
-
-
-  
-  <script src="js/vendor/jquery-2.1.1.min.js"></script>
-  <script src="js/main.js"></script>
+	
 </body>
 </html>

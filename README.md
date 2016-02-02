@@ -1,6 +1,8 @@
-# Building a new site some with paper js stuff
+# Designers droppin knowledge
+## Maths & Motion 1.0
 
-Based on mark's experiment base
+ Let's learn some techniques from the creative coding world.
+ This project is taken from mark's experiment base.
 
 ### getting started
 

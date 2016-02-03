@@ -1,64 +1,27 @@
-var connectSeg = [];
+// Let's initialise some variables for the circle
+var circleRadius = 10;
+var circlePosition = new Point(100,100);
+var circlePosition = view.center;
 
-function initialRender() {
-	var margin = 50;
-	var startxPos = margin;
-	var endxPos = view.size.width - margin;
-	var fullx = endxPos - startxPos;
-	var xInc = fullx / 20;
-
-	var startyPos = margin;
-	var endyPos = view.size.height - margin;
-	var fully = endyPos - startyPos;
-	var yInc = fully / 20;
+// Now let's build the circle from those variables
+var myCircle = new Path.Circle(circlePosition, circleRadius);
+myCircle.fillColor = 'white';
+listCoords(circlePosition);
 
 
-	for (var i = startxPos; i <= endxPos; i+=xInc) {
-		for (var j = startyPos; j < endyPos; j+=yInc) {
-        	var position = new Point(i, j);
-        	var path = new Path(position, position + 10);
-        	var icolor = i / view.size.width;
-        	var jcolor = j / view.size.width;
-
-        	var pathColor = new Color(jcolor, 0.2, icolor);
-			path.style = {
-				strokeColor: pathColor,
-				strokeWidth: 5,
-				strokeCap: 'round'
-			};
-			connectSeg.push(path);
-
-        }
-    }
+// Now let's write a quick function to display the co-ordinates
+// Takes a point
+function listCoords(_point) {
+	listCoords2(_point.x, _point.y);
 }
 
-initialRender();
+// Takes 2 points
+function listCoords2(_xPos, _yPos) {
+	var textPosition = new Point(_xPos , _yPos + 30)
 
-function moveLine(thisPos, targetPos) {
-	
-		var P1 = thisPos;
-		var P2 = targetPos;
-		var d1 = P2 - P1;
-		var direction = d1.normalize();
-
-		var P3 = P1 + (direction * (d1 * 0.05));
-
-    	return P3;
-}
-
-function onResize(event) {
-
-}
-
-
-function onFrame(event) {
-
-}
-
-function onMouseMove(event) {
-	
-	for(i = 0; i < connectSeg.length; i++){
-		var position = moveLine(connectSeg[i].segments[0].point, event.point);
-		connectSeg[i].segments[1].point = position;
-	}
+	var text = new PointText(textPosition);
+	text.justification = 'center';
+	text.fillColor = 'white';
+	// Let's display the co-ordinates of the 
+	text.content = _xPos + ', ' + _yPos;
 }
